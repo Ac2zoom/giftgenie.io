@@ -12,10 +12,11 @@ var query = "";
 
 var friends = "";
 
-var accessToken = "CAACEdEose0cBANa2AOJKUwj4KhZAt6xPWnYQa6zqbag3dNdcjRaHfSlcTtVVfH4nGD5ZCdRD55ic6ZBmMGHFK3tR3UZBEIi5By5VBBblTjL0XqYiHMUYSKjfEUh92spLeylcnX6pGWgEvyNeXc2WsdGsURpvcHUfoRMVfT8Iz1yOaaNVmC2th1ZA3WekC6DRhBrYWkI6TkQvbhdfaEfFU";  //TODO
+var accessToken = "CAACEdEose0cBALyT9jdNo1Ijcpy4M0ZCZCy53jQ3zorSQStyRhpppEHWIxOKkn9ewVkAIA3x2Mm0xzcL3ZCqo1zzgAt6yPB2KsTiZBNpgo0yyHw8Guw9ZCgeJkHHYR62mExip78ZBFgChbl3AGFnoymmJQca30Yx9WMiudWYwcLPjWRmmQct9gGv4f308IpZAXqaZB18vba0KhF61f6bcruZA";  //TODO
 
 facebook.getFbData(accessToken, '/me/friends?fields=name,id,picture', function(data){
     friends = data;
+    process.stdout.write(data);
 });
 
 app.listen(8080);
