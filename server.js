@@ -2,7 +2,13 @@ var express = require("express"),
     app = express(),
     facebook = require('./facebook.js'),
     https = require('https'),
-    swig = require('swig');
+    swig = require('swig'),
+    parseString = require('xml2js').parseString;
+
+var xml = "<root>Hello xml2js!</root>"
+parseString(xml, function (err, result) {
+    console.dir(result);
+});
 
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
