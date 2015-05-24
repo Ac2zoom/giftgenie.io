@@ -20,6 +20,7 @@ facebook.getFbData(accessToken, '/me/friends?fields=name,id,picture', function(d
 });
 
 app.get('/app', function(req, res){
+    var output;
     var htmlSource = fs.readFileSync("friend_page.html", "utf8");
     call_jsdom(htmlSource, function (window) {
         var $ = window.$;
@@ -33,12 +34,13 @@ app.get('/app', function(req, res){
                 var name_link = $("<a>").attr("id", friends[data][i][id] + "_link");
                 $("#" + friends[data][i][id]).append(name_link);
                 $("#" + friends[data][i][id] + "_link").attr("href", "https://www.facebook.com/" + friends[data][i][id]);
+                $("#" + friends[data][i][id] + "_link").text(friends[data][i][name];
             }
         }
 
-        console.log(documentToSource(window.document));
+        var output = documentToSource(window.document));
     });
-    res.render('friend_page', facebook_info.json);
+    res.render(output, facebook_info.json);
 });
 
 app.listen(8080);
