@@ -17,14 +17,52 @@
 	<div id="categories">
 	</div>
     
-    <p id="object">{{id}}</p>
+  <p id="object" style="visibility: hidden">{{id}}</p>
 
 	<script type="text/javascript" language="javascript">
+        var personId = document.getElementById("object").innerHTML;
+        alert(personId);
+
         $(document).ready(function() {
                 $("#driver").click(function(event){
-                    $("#categories").css("visibility", "visible");
-
                     $.getJSON('example.json', function(jd) {
+                        var ourPerson = {
+                          id: personId,
+                          name: "",
+                          cat_likes: {},
+                          /*cat_freqs: {},
+                          top_five: {}*/
+                        }
+
+                        for (x = 0; x < jd['data'].length; x++) {
+                          var curr = jd['data'][x];
+                          if (ourPerson.id == curr.id) {
+                            ourPerson.name = curr.name;
+                            for (y = 0; y < jd['data'][x].likes['data'].length; y++) { //creates category-like pairs in the appropriate array
+                              ourPerson.cat_likes[jd['data'][x].likes['data'][y].category] = jd['data'][x].likes['data'][y].name;
+                            }
+
+                            /*for (y = 0; y < jd['data'][x].likes['data'].length; y++) { //initializes freqs to 0
+                              ourPerson.cat_freqs[jd['data'][x].likes['data'][y].category] = 0;
+                            }
+
+                            for (y = 0; y < cat_freqs.length; y++) { //o(n^2) frequency tallier
+                              for (z = 0; z < cat_freqs.length; z++) {
+                                ourPerson.cat_freqs[jd['data'][x].likes['data'][z].category]++;
+                              }
+                            }
+
+                            for (z = 0; z < 5; z++) {
+                              for (a = 0; a < cat_freqs.length; a++) {
+
+                                ourPerson.top_five[z] = 
+                              }
+                            }*/
+                            
+                          }
+                        }
+
+
                         for (i = 0; i < jd['data'].length; i++) {
                           $('#categories').append('<h1> ' + jd['data'][i].name + '</h1>');
                           var obj = jd['data'][i].likes;
