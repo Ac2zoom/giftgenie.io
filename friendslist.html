@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app>
 <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +7,14 @@
 
     <title>GiftGenie</title>
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     
-
-
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    
+    <script src="myApp.js"></script>
+    
+    <script src="index.js"></script>
+    
 <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
 
 
@@ -64,7 +69,7 @@
                 color:#207cca;
 }</style>
 </head>
-<body>
+<body onLoad="loadFriends()">
 
     <div class="header">
     <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
@@ -90,5 +95,8 @@
             <a href="http://www.facebook.com/1016542094" id="1016542094_link">Shaloo Munjal Verma</a>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    
+    <script src="myApp.js"></script>
 </body>
 </html>
