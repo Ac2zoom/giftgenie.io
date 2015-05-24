@@ -8,7 +8,7 @@ var https = require('https');
  
 var query = "";
 
-var accessToken = "CAACEdEose0cBANa2AOJKUwj4KhZAt6xPWnYQa6zqbag3dNdcjRaHfSlcTtVVfH4nGD5ZCdRD55ic6ZBmMGHFK3tR3UZBEIi5By5VBBblTjL0XqYiHMUYSKjfEUh92spLeylcnX6pGWgEvyNeXc2WsdGsURpvcHUfoRMVfT8Iz1yOaaNVmC2th1ZA3WekC6DRhBrYWkI6TkQvbhdfaEfFU";  //TODO
+var accessToken = "CAACEdEose0cBAJCLpXgPJoypZCWdENSJYbvg9y6t9o8uKup6QST1ZAztHjebGgrNldGo0DuZBz3WHZC3vX2jqOEZB2HZCY6v7nJWW6ZBlzAJzN8ObF87aiwXGEoHwB6ZAPpZCNVfT63HAxRMZBUpZC5uPKCDzyM9E881DN2ZABBnI0nncaTuQAIgbh0ZATZAaTgeQl7h19XiqkI7b6U41o8XMNQiIq";  //TODO
 
 var data;
 
@@ -39,4 +39,4 @@ reqGet.on('error', function (e) {
     console.error(e);
 });
 
-console.log(data[data][0][name]);
+//console.log(data[data][0][name]);
