@@ -1,7 +1,7 @@
 {
-  "name": "intro_to_npm",
-  "version": "0.0.0",
-  "description": "npm introduction",
+  "name": "giftgenie.io",
+  "version": "0.12.4",
+  "description": "giftgenie.io",
   "main": "app.js",
   "dependencies": {
     "consolidate": "~0.9.1",
@@ -10,5 +10,9 @@
     "https": "0.12.3"
   },
   "author": "Shaun Verch",
-  "license": "BSD"
+  "license": "BSD",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ac2zoom/giftgenie.io.git"
+}
 }
