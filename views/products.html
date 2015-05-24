@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Categories</title>
+	<script type="text/javascript" src="http://localhost:8080/friends"></script>
+	<script type="text/javascript" src="../xml2json.js"></script>
+	<script id="jq" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<link id="jq_css" rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script id="jq_ui" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="products.js"></script>
+</head>
+
+<body>
+	<input type="button" id="driver" value="Load Data" />
+
+	<div id="categories">
+	</div>
+    
+    <p id="object">{{id}}</p>
+
+	<script type="text/javascript" language="javascript">
+        $(document).ready(function() {
+                $("#driver").click(function(event){
+                    $("#categories").css("visibility", "visible");
+
+                    $.getJSON('http://localhost:8080/friends', function(jd) {
+                        for (i = 0; i < jd['data'].length; i++) {
+                          $('#categories').append('<h1> ' + jd['data'][i].name + '</h1>');
+                          var obj = jd['data'][i].likes;
+                          if (typeof obj === "undefined") {
+                            $('#categories').append('<p> He/she hasn\'t liked anything </p>');
+                          } else {
+                            for (j = 0; j < jd['data'][i].likes['data'].length; j++) {
+                                $('#categories').append('<p class=""> ' + jd['data'][i].likes['data'][j].category + '</p>');
+                            }
+
+                          }
+                        }
+                        $( "#categories" ).accordion("destroy").accordion();
+                    });
+               });
+         });
+    </script>
+    <script>
+   		$( "#categories" ).accordion();
+	</script>
+</body>
+
+</html>
