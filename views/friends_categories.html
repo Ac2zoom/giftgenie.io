@@ -3,29 +3,65 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
-	<title>Categories</title>
-	<script type="text/javascript" src="http://localhost:8080/friends"></script>
-	<script id="jq" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<link id="jq_css" rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-	<script id="jq_ui" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <meta charset="utf-8">
+  <title>Categories</title>
+  <script type="text/javascript" src="http://localhost:8080/friends"></script>
+  <script id="jq" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <link id="jq_css" rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script id="jq_ui" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 </head>
 
 <body>
-	<input type="button" id="driver" value="Load Data" />
+  <input type="button" id="driver" value="Load Data" />
 
-	<div id="categories">
-	</div>
+  <div id="categories">
+  </div>
     
     <p id="object">{{id}}</p>
 
-	<script type="text/javascript" language="javascript">
+  <script type="text/javascript" language="javascript">
+        //var personId = document.getElementById("object").innerHTML;
+        var personId = 871638772860326;
+
         $(document).ready(function() {
                 $("#driver").click(function(event){
                     $("#categories").css("visibility", "visible");
 
                     $.getJSON('example.json', function(jd) {
-                        for (i = 0; i < jd['data'].length; i++) {
+                        var obj = {
+                          id: personId,
+                          name: ""
+                        }
+
+                        for (x = 0; x < jd['data'].length; x++) {
+                          var curr = jd['data'][x];
+                          if (obj.id == curr.id) {
+                            obj.name = curr.name;
+                            $('#categories').html('<h1; color: white;"> ' + obj.name + '</h1>');
+                            $('#categories').append('<p></p>');
+                            $('#categories').append('<h1> ' + curr.likes['data'][0].category + '</h1>');
+                            $('#categories').append('<p> ' + curr.likes['data'][0].name + '</p>');
+                            obj.cat_likes = [];
+                            obj.cat_likes[curr.likes['data'][0].category] = [];
+                            obj.cat_likes[curr.likes['data'][0].category].push(curr.likes['data'][0].name);
+                            
+                            for (j = 1; j < curr.likes['data'].length; j++) {
+                                $('#categories').append('<h1> ' + curr.likes['data'][j].category + '</h1>');
+                                $('#categories').append('<p> ' + curr.likes['data'][j].name + '</p>');
+                              obj.cat_likes[curr.likes['data'][j].category] = [];
+                              obj.cat_likes[curr.likes['data'][j].category].push(curr.likes['data'][j].name);
+                            }
+
+                            /*var n = 0;
+                            for (k = 0; k < curr.likes['data'].length; k++) {
+                              if ()
+                            $('#categories').append('<h1> ' + cat_likes[k][n] + '</h1>');
+                              $('#categories').append('<p> ' + curr.likes['data'][j].name + '</p>');
+                          }*/
+                          }
+                        }
+
+                        /*for (i = 0; i < jd['data'].length; i++) {
                           $('#categories').append('<h1> ' + jd['data'][i].name + '</h1>');
                           var obj = jd['data'][i].likes;
                           if (typeof obj === "undefined") {
@@ -36,15 +72,15 @@
                             }
 
                           }
-                        }
+                        }*/
                         $( "#categories" ).accordion("destroy").accordion();
                     });
                });
          });
     </script>
     <script>
-   		$( "#categories" ).accordion();
-	</script>
+      $( "#categories" ).accordion();
+  </script>
 </body>
 
 </html>
