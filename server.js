@@ -3,46 +3,50 @@ var express = require("express"),
     facebook = require('./facebook.js'),
     https = require('https'),
     swig = require('swig'),
-    parseString = require('xml2js').parseString;
+    fs = require('fs'),
+    xml2js = require('xml2js');
 
-var xml = "<root>Hello xml2js!</root>"
-parseString(xml, function (err, result) {
-    console.dir(result);
-});
+    var parser = new xml2js.Parser();
+    fs.readFile(__dirname + 'outputs/test.xml', function(err, data) {
+        parser.parseString(data, function (err, result) {
+            console.dir(result);
+            console.log('Done');
+        });
+    });
 
-app.set('view engine', 'html');
-app.set('views', __dirname + '/views');
+    app.set('view engine', 'html');
+    app.set('views', __dirname + '/views');
 
-app.engine('html', swig.renderFile);
- 
-var query = "";
+    app.engine('html', swig.renderFile);
 
-var friends = "";
+    var query = "";
 
-var accessToken = "CAACEdEose0cBAAemwQCIR7Pcx6oynyzzz37kFMnfKnMe3zrCmmWiBWWGp8ENNG8aZCvZBgtx6lmS8jINTpgnxOyZCa9iQM0SHOygokWhYfu9gri8AGcdVdzQNbZBHpO4UBj72bjVqOBAZC2F3JZAwaXoKw3YME5V70HfcRp9R2DZBrwO8f2226wO6AK7rHtd8eaqTr1oikK8iMOTl9vfKOn";  //TODO
+    var friends = "";
 
-facebook.getFbData(accessToken, '/me/friends?fields=name,id,picture', function(data){
-    friends = data;
-    process.stdout.write(data);
-});
+    var accessToken = "CAACEdEose0cBAAemwQCIR7Pcx6oynyzzz37kFMnfKnMe3zrCmmWiBWWGp8ENNG8aZCvZBgtx6lmS8jINTpgnxOyZCa9iQM0SHOygokWhYfu9gri8AGcdVdzQNbZBHpO4UBj72bjVqOBAZC2F3JZAwaXoKw3YME5V70HfcRp9R2DZBrwO8f2226wO6AK7rHtd8eaqTr1oikK8iMOTl9vfKOn";  //TODO
 
-app.get('/friends', function(req, res){
-    res.header("Access-Control-Allow-Origin", "*");
-    res.send(friends);
-});
+    facebook.getFbData(accessToken, '/me/friends?fields=name,id,picture', function(data){
+        friends = data;
+        process.stdout.write(data);
+    });
 
-app.get('/app/', function(req, res){
-    console.log(req.query.id);
-    temp = {"id" : req};
-   res.render("friends_categories", temp);
-});
+    app.get('/friends', function(req, res){
+        res.header("Access-Control-Allow-Origin", "*");
+        res.send(friends);
+    });
 
-app.get('/', function(req, res){
-    res.render("index");
-});
+    app.get('/app/', function(req, res){
+        console.log(req.query.id);
+        temp = {"id" : req};
+       res.render("friends_categories", temp);
+    });
 
-app.post('/access_token',function(request,response){
-    accessToken = request.access_token;
-});
+    app.get('/', function(req, res){
+        res.render("index");
+    });
 
-app.listen(8080);
+    app.post('/access_token',function(request,response){
+        accessToken = request.access_token;
+    });
+
+    app.listen(8080);
