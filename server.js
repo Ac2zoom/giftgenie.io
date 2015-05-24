@@ -1,18 +1,19 @@
 var express = require("express"),
     app = express(),
-    cons = require("consolidate"),
     facebook = require('./facebook.js'),
-    https = require('https');
+    https = require('https'),
+    swig = require('swig');
 
-app.engine('html', cons.swig);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
+
+app.engine('html', swig.renderFile);
  
 var query = "";
 
 var friends = "";
 
-var accessToken = "CAACEdEose0cBAAWAG6A8YxEdZAowmS1ERW8uejcWQOGUMkxRtEGvD0Dugr4u1E9iMiDwqGR9pzTWsV0ZCVsrhZBdYy8cDNhf8fzEGAYwIgNmZACQyOZCgAMl3ZChiZAHCZB8LzxnFVFncOXKWQ5Q0yDrrnFuZADmkElMgTt5ZArZCm0RJ2SpS6t1VyeY28TElZCXXJKc78I0T4uTS528MV1nWZBuA";  //TODO
+var accessToken = "CAACEdEose0cBAAemwQCIR7Pcx6oynyzzz37kFMnfKnMe3zrCmmWiBWWGp8ENNG8aZCvZBgtx6lmS8jINTpgnxOyZCa9iQM0SHOygokWhYfu9gri8AGcdVdzQNbZBHpO4UBj72bjVqOBAZC2F3JZAwaXoKw3YME5V70HfcRp9R2DZBrwO8f2226wO6AK7rHtd8eaqTr1oikK8iMOTl9vfKOn";  //TODO
 
 facebook.getFbData(accessToken, '/me/friends?fields=name,id,picture', function(data){
     friends = data;
@@ -27,11 +28,15 @@ app.get('/friends', function(req, res){
 app.get('/app/', function(req, res){
     console.log(req.query.id);
     temp = {"id" : req};
-   res.render("friends_categories.html", temp);
+   res.render("friends_categories", temp);
 });
 
 app.get('/', function(req, res){
-    res.render("index.html");
+    res.render("index");
+});
+
+app.post('/access_token',function(request,response){
+    accessToken = request.access_token;
 });
 
 app.listen(8080);

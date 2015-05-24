@@ -1,21 +1,23 @@
 {
   "name": "giftgenie.io",
-  "version": "0.12.4",
+  "version": "0.0.1",
   "description": "giftgenie.io",
   "main": "app.js",
   "dependencies": {
     "consolidate": "~0.9.1",
     "express": "3.x",
     "mongodb": "~1.3.10",
-    "https": "0.12.3"
+    "https": "1.0.0",
+    "swig": "1.4.2"
   },
-  "author": "Shaun Verch",
-  "license": "BSD",
+  "author": "CodeDay Team 1",
+  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/naidu28/giftgenie.io.git"
+    "url": "https://github.com/naidu28/giftgenie.io"
   },
   "engines": {
-      "node": "0.12.4"
+      "node": "0.12.4",
+      "npm":  "2.10.1"
   }
 }

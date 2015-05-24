@@ -24,7 +24,7 @@
                 $("#driver").click(function(event){
                     $("#categories").css("visibility", "visible");
 
-                    $.getJSON('example.json', function(jd) {
+                    $.getJSON('http://localhost:8080/friends', function(jd) {
                         for (i = 0; i < jd['data'].length; i++) {
                           $('#categories').append('<h1> ' + jd['data'][i].name + '</h1>');
                           var obj = jd['data'][i].likes;
