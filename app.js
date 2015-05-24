@@ -17,3 +17,5 @@ var accessToken = "CAACEdEose0cBANa2AOJKUwj4KhZAt6xPWnYQa6zqbag3dNdcjRaHfSlcTtVV
 facebook.getFbData(accessToken, '/me/friends?fields=name,id,picture', function(data){
     friends = data;
 });
+
+app.listen(8080);
