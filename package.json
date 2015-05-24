@@ -16,6 +16,7 @@
     "url": "git://github.com/ac2zoom/giftgenie.io.git"
   },
   "engines": {
-      "node": "0.12.4"
+      "node": "0.12.4",
+      "npm":  "4.12.4"
   }
 }
