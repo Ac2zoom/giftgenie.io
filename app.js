@@ -19,18 +19,15 @@ facebook.getFbData(accessToken, '/me/friends?fields=name,id,picture', function(d
     process.stdout.write(data);
 });
 
-app.get('/app', function(req, res){
-    res.render("friendslist.html", facebook_info.json);
-});
-
 app.get('/friends', function(req, res){
     res.header("Access-Control-Allow-Origin", "*");
     res.send(friends);
 });
 
-app.get('/app/*', function(req, res){
+app.get('/app', function(req, res){
+    console.log(req.query.id);
     temp = {"id" : req};
-   res.render("friends_categories.html", JSON.stringify(temp));
+   res.render("friends_categories.html", temp);
 });
 
 

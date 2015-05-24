@@ -16,7 +16,7 @@ function loadFriends() {
             $("#" + friends.data[i].id + "_img").attr("src", friends.data[i].picture.data.url);
             var name_link = $("<a>").attr("id", friends.data[i].id + "_link");
             $("#" + friends.data[i].id).append(name_link);
-            $("#" + friends.data[i].id + "_link").attr("href", "https://www.facebook.com/" + friends.data[i].id);
+            $("#" + friends.data[i].id + "_link").attr("href", "http://localhost:8080/app?id=" + friends.data[i].id);
             $("#" + friends.data[i].id + "_link").text(friends.data[i].name);
         }
     $.get(friends.paging.next, function(data, status) {
