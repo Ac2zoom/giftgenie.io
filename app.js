@@ -19,4 +19,26 @@ facebook.getFbData(accessToken, '/me/friends?fields=name,id,picture', function(d
     process.stdout.write(data);
 });
 
+app.get('/app', function(req, res){
+    var htmlSource = fs.readFileSync("friend_page.html", "utf8");
+    call_jsdom(htmlSource, function (window) {
+        var $ = window.$;
+        while (friends[paging][next] != undefined) {
+            for(i = 0; i < friends[data].length; i++){
+                var friend_div = $("<div class='person'>").attr("id", friends[data][i][id]);
+                $("#friends").append(friend_div);
+                var prof_img = $("<img>").attr("id", friends[data][i][id] + "_img");
+                $("#" + friends[data][i][id]).append(prof_img);
+                $("#" + friends[data][i][id] + "_img").attr("src", friends[data][i][picture][data][url]);
+                var name_link = $("<a>").attr("id", friends[data][i][id] + "_link");
+                $("#" + friends[data][i][id]).append(name_link);
+                $("#" + friends[data][i][id] + "_link").attr("href", "https://www.facebook.com/" + friends[data][i][id]);
+            }
+        }
+
+        console.log(documentToSource(window.document));
+    });
+    res.render('friend_page', facebook_info.json);
+});
+
 app.listen(8080);
